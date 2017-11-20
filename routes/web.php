@@ -31,4 +31,5 @@ Route::group(['prefix' => 'staff', 'as' => 'staff.'], function () {
   Route::post('/password/reset', 'StaffAuth\ResetPasswordController@reset');
   Route::get('/password/reset', 'StaffAuth\ForgotPasswordController@showLinkRequestForm');
   Route::get('/password/reset/{token}', 'StaffAuth\ResetPasswordController@showResetForm');
+
 });

@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
+                <div class="panel-heading">Attendance summary</div>
 
                 <div class="panel-body">
                     Hi {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}
@@ -34,12 +34,20 @@
                         </tbody>
                         <thead>
                             <tr>
-                                <th>Percentage</th>
-                                @if (Auth::user()->attendance->count() > 0)
+                                <th>Status Attendance</th>
+                                {{--@if (Auth::user()->attendance->count() > 0)--}}
                                     {{--<th>{{ Auth::user()->present->count() / Auth::user()->attendance->count() * 100 }}</th>--}}
-                                    <th> {{ number_format((Auth::user()->attendance->count())/ 3, 2 )}} %</th>
+                                    {{--<th> {{ number_format((Auth::user()->attendance->count())/ 3, 2 )}} %</th>--}}
+                                {{--@else--}}
+                                    {{--<th>100% attend class</th>--}}
+                                {{--@endif--}}
+                                @if(Auth::user()->attendance->count() < 3)
+                                    <th>{{Auth::user()->attendance->count()}}</th>
                                 @else
-                                    <th>100% attend class</th>
+                                    <th>
+                                        You are not allowed to attend the final exam. Because You was absent the class {{Auth::user()->attendance->count()}}
+                                        in this semester.
+                                    </th>
                                 @endif
                             </tr>
                         </thead>
