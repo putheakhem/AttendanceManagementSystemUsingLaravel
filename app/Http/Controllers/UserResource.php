@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use Carbon\Carbon;
-
-use App\User;
 use App\Department;
+use App\User;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 class UserResource extends Controller
 {
@@ -18,19 +16,19 @@ class UserResource extends Controller
      */
     public function index(Request $request)
     {
-        $Users = new User;        
+        $Users = new User();
 
-        if($request->has('department_id')) {
+        if ($request->has('department_id')) {
             $Users = $Users->where('department_id', $request->department_id);
         }
 
-        if($request->has('batch')) {
+        if ($request->has('batch')) {
             $Users = $Users->where('batch', $request->batch);
         }
 
         $Users = $Users->get();
 
-        if($request->ajax()) {
+        if ($request->ajax()) {
             return $Users;
         }
 
@@ -45,33 +43,35 @@ class UserResource extends Controller
     public function create()
     {
         $Departments = Department::all();
+
         return view('staff.student.create', compact('Departments'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         $this->validate($request, [
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'email' => 'required|string|max:255|unique:users',
-            'dob' => 'required|date',
+            'first_name'    => 'required|string|max:255',
+            'last_name'     => 'required|string|max:255',
+            'email'         => 'required|string|max:255|unique:users',
+            'dob'           => 'required|date',
             'department_id' => 'required|exists:departments,id',
         ]);
 
         User::create([
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'email' => $request->email,
-            'dob' => Carbon::parse($request->dob),
+            'first_name'    => $request->first_name,
+            'last_name'     => $request->last_name,
+            'email'         => $request->email,
+            'dob'           => Carbon::parse($request->dob),
             'department_id' => $request->department_id,
-            'password' => bcrypt($request->dob),
-            'batch' => $request->batch,
+            'password'      => bcrypt($request->dob),
+            'batch'         => $request->batch,
         ]);
 
         return redirect()->route('staff.student.index');
@@ -80,7 +80,8 @@ class UserResource extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -91,7 +92,8 @@ class UserResource extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -102,8 +104,9 @@ class UserResource extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -114,7 +117,8 @@ class UserResource extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

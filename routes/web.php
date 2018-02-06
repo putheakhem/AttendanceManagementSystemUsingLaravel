@@ -20,16 +20,15 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['prefix' => 'staff', 'as' => 'staff.'], function () {
-  Route::get('/login', 'StaffAuth\LoginController@showLoginForm')->name('login');
-  Route::post('/login', 'StaffAuth\LoginController@login');
-  Route::post('/logout', 'StaffAuth\LoginController@logout');
+    Route::get('/login', 'StaffAuth\LoginController@showLoginForm')->name('login');
+    Route::post('/login', 'StaffAuth\LoginController@login');
+    Route::post('/logout', 'StaffAuth\LoginController@logout');
 
-  Route::get('/register', 'StaffAuth\RegisterController@showRegistrationForm');
-  Route::post('/register', 'StaffAuth\RegisterController@register');
+    Route::get('/register', 'StaffAuth\RegisterController@showRegistrationForm');
+    Route::post('/register', 'StaffAuth\RegisterController@register');
 
-  Route::post('/password/email', 'StaffAuth\ForgotPasswordController@sendResetLinkEmail');
-  Route::post('/password/reset', 'StaffAuth\ResetPasswordController@reset');
-  Route::get('/password/reset', 'StaffAuth\ForgotPasswordController@showLinkRequestForm');
-  Route::get('/password/reset/{token}', 'StaffAuth\ResetPasswordController@showResetForm');
-
+    Route::post('/password/email', 'StaffAuth\ForgotPasswordController@sendResetLinkEmail');
+    Route::post('/password/reset', 'StaffAuth\ResetPasswordController@reset');
+    Route::get('/password/reset', 'StaffAuth\ForgotPasswordController@showLinkRequestForm');
+    Route::get('/password/reset/{token}', 'StaffAuth\ResetPasswordController@showResetForm');
 });

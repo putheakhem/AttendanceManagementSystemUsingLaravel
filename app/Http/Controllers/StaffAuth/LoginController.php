@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\StaffAuth;
 
 use App\Http\Controllers\Controller;
+use Hesto\MultiAuth\Traits\LogsoutGuard;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
-use Hesto\MultiAuth\Traits\LogsoutGuard;
 
 class LoginController extends Controller
 {

@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use Carbon\Carbon;
-
-use App\User;
 use App\Attendance;
 use App\Department;
+use App\User;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 class AttendanceResource extends Controller
 {
@@ -31,13 +29,15 @@ class AttendanceResource extends Controller
     {
         $Users = User::all();
         $Departments = Department::all();
+
         return view('staff.attendance.create', compact('Users', 'Departments'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -52,12 +52,12 @@ class AttendanceResource extends Controller
 
         foreach ($Users as $ID => $Status) {
             $Attendance[] = [
-                'user_id' => $ID,
+                'user_id'       => $ID,
                 'department_id' => $request->department_id,
-                'date' => Carbon::parse($request->date),
-                'attendance' => $Status,
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
+                'date'          => Carbon::parse($request->date),
+                'attendance'    => $Status,
+                'created_at'    => Carbon::now(),
+                'updated_at'    => Carbon::now(),
             ];
         }
 
@@ -69,7 +69,8 @@ class AttendanceResource extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -80,7 +81,8 @@ class AttendanceResource extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -91,8 +93,9 @@ class AttendanceResource extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -103,7 +106,8 @@ class AttendanceResource extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
