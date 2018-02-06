@@ -12,7 +12,7 @@ class Attendance extends Model
      * @var array
      */
     protected $fillable = [
-        'department_id', 'student_id', 'date', 'attendance'
+        'department_id', 'student_id', 'date', 'attendance',
     ];
 
     /**
